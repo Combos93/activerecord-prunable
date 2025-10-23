@@ -15,7 +15,7 @@ module Prunable
       models, params = resolve_args(args)
 
       models.each_with_object({}) do |model, pruned|
-        pruned[model.table_name] = prune_model!(model, params)
+        pruned[model.table_name] = prune_model!(model, **params)
       end
     end
 
@@ -27,7 +27,7 @@ module Prunable
 
       models.each do |model|
         begin
-          pruned[model.table_name] = prune_model!(model, params)
+          pruned[model.table_name] = prune_model!(model, **params)
         rescue StandardError => e
           errors << e
         end
